@@ -1,7 +1,7 @@
 
 package possystem;
 
-public class PercentageDiscount implements ProductDiscountStrategy {
+public class PercentOffDiscount implements ProductDiscountStrategy {
        
     private static final double MIN_DISC_RATE = 0.0;
     private static final double  MAX_DISCOUNT_RATE = 1.0;
@@ -12,27 +12,26 @@ public class PercentageDiscount implements ProductDiscountStrategy {
  
 
 // Constructor    
-    public PercentageDiscount(double discountRate) {
+    public PercentOffDiscount(double discountRate) {
         setDiscountRate(discountRate);
     }
+    
+    
 
-// Implementing abstract methods    
+// Implementing abstract methods
+    
     @Override
-    public final double getPriceAfterDiscount(double unitPrice, int qty) {
-        return unitPrice*(1.0 - discountRate)*qty; 
+    public final double getDiscountedTotal(double unitPrice, int qty) {
+        return unitPrice*qty - getSavings(unitPrice, qty); 
     }
-
+    
     @Override
-    public final double getSavings(double unitPrice, int qty) {
-        return getOriginalPrice(unitPrice,qty) - getPriceAfterDiscount(unitPrice,qty);
-    }
-
-    @Override
-    public final double getOriginalPrice(double unitPrice, int qty) {
-        return unitPrice*qty;
+    public double getSavings(double unitPrice, int qty) {
+       return unitPrice*qty*discountRate;
     }
     
     
+     
 // Getters and Setters
     public final double getDiscountRate() {
         return discountRate;
@@ -45,6 +44,8 @@ public class PercentageDiscount implements ProductDiscountStrategy {
         }
         this.discountRate = discountRate;
     }
+
+   
 
    
     

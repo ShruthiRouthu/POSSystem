@@ -22,19 +22,19 @@ public class Product {
   
 // Query Methods which delegate work to DiscountStrategy objects
     
-    public final double getDiscountedPrice(int productQty)
+    public final double getDiscountedTotal(int productQty)
     {
-       return  productDiscount.getPriceAfterDiscount(unitPrice, productQty);
+       return  productDiscount.getDiscountedTotal(unitPrice, productQty);
     }
     
     public final double getSavings(int productQty)
     {
-        return  productDiscount.getSavings(unitPrice, productQty);
+        return productDiscount.getSavings(unitPrice, productQty);
     }
      
     public final double getOriginalPrice(int productQty)
     {
-        return  productDiscount.getOriginalPrice(unitPrice, productQty); 
+        return unitPrice*productQty; 
     }
     
     

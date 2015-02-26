@@ -18,7 +18,7 @@ public class GroupPurchaseDiscount implements ProductDiscountStrategy {
 
 // Implementing Abstract methods
     @Override
-    public final double getPriceAfterDiscount(double unitPrice, int qty) {
+    public final double getDiscountedTotal(double unitPrice, int qty) {
         
        int nofGroups = qty/groupQuantity;
        int remainingProducts = qty%groupQuantity;
@@ -28,16 +28,12 @@ public class GroupPurchaseDiscount implements ProductDiscountStrategy {
        return (nofGroups*grpPrice) + (remainingProducts*unitPrice) ;
               
     }
-
+    
     @Override
     public final double getSavings(double unitPrice, int qty) {
-        return getOriginalPrice(unitPrice,qty) - getPriceAfterDiscount(unitPrice,qty);
+        return unitPrice*qty - getDiscountedTotal(unitPrice,qty);
     }
-
-    @Override
-    public final double getOriginalPrice(double unitPrice, int qty) {
-       return unitPrice*qty;
-    }
+    
     
 // Getters & Setters
 

@@ -17,7 +17,7 @@ public class ArrayData implements DataAccessStrategy{
     private Product[] productArray = {
        
         new Product("P111", "Men's T-Shirt", 20.00,new GroupPurchaseDiscount(2,0.25) ),
-        new Product("P222", "Women's Jeans", 50.00 , new PercentageDiscount(0.20) ),
+        new Product("P222", "Women's Jeans", 50.00 , new PercentOffDiscount(0.20) ),
         new Product("P333", "Women's Dress", 100.00, new NoDiscount()),
         new Product("P222", "Men's Pair of Socks", 5.00, new MinimumQuantityDiscount(10,0.50)),
         new Product("P222", "Men's Coat", 150.00,new FlatRateDiscount(50.00))
@@ -26,12 +26,17 @@ public class ArrayData implements DataAccessStrategy{
 
     @Override
     public Customer findCustomerByID(String customerID) {
-        if(customerID == null && customerID.length() == 0)
-        {
-            System.out.println("Sorry, findCustomerByID method has illegal argument");
-            return null;  
-        }
         
+        if(customerID == null)
+        {
+            throw new NullPointerException();
+        }
+        else if(customerID.length() == 0) 
+        {
+            throw new IllegalArgumentException("Error: Invalid productID !" +
+                                               " Required format C + 3 digits (C000) ");
+        }
+         
         // Initializing customer object
         Customer myCustomer = null;
         
@@ -40,6 +45,7 @@ public class ArrayData implements DataAccessStrategy{
             if(c.getCustomerID().equals(customerID))
             {
                 myCustomer = c;
+                break;
             }
         }
         
@@ -48,10 +54,15 @@ public class ArrayData implements DataAccessStrategy{
 
     @Override
     public Product findProductByID(String productID) {
-         if(productID == null && productID.length() == 0)
+        
+        if(productID == null)
         {
-            System.out.println("Sorry, findProductByID method has illegal argument");
-            return null;  
+            throw new NullPointerException();
+        }
+        else if(productID.length() == 0) 
+        {
+            throw new IllegalArgumentException("Error: Invalid productID !" +
+                                               " Preferred format P + 3 digits (P000) ");
         }
         
         // Initializing customer object
@@ -62,6 +73,7 @@ public class ArrayData implements DataAccessStrategy{
             if(p.getProductID().equals(productID))
             {
                 myProduct = p;
+                break;
             }
         }
         

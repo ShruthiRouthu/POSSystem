@@ -17,9 +17,10 @@ public class MinimumQuantityDiscount implements ProductDiscountStrategy {
         setDiscRatePerUnit(discRatePerUnit);
     }
     
-// Implementing Abstract Methods    
+// Implementing Abstract Methods 
+    
     @Override
-    public final double getPriceAfterDiscount(double unitPrice, int qty) {
+    public final double getDiscountedTotal(double unitPrice, int qty) {
         if(qty >= minimumQty)
         {
             return unitPrice*(1.0 - discRatePerUnit)*qty ;
@@ -29,18 +30,12 @@ public class MinimumQuantityDiscount implements ProductDiscountStrategy {
             return unitPrice*qty;
         }
     }            
-      
-    @Override
-    public final double getSavings(double unitPrice, int qty) {
-        return getOriginalPrice(unitPrice,qty) - getPriceAfterDiscount(unitPrice,qty);
-    }
-
-    @Override
-    public final double getOriginalPrice(double unitPrice, int qty) {
-        return unitPrice*qty;
-    }
-     
     
+    @Override
+    public double getSavings(double unitPrice, int qty) {
+        return (unitPrice*qty - getDiscountedTotal(unitPrice, qty));
+    }
+      
 // Getters and Setters
 
     public final int getMinimumQty() {
@@ -66,6 +61,8 @@ public class MinimumQuantityDiscount implements ProductDiscountStrategy {
         }
         this.discRatePerUnit = discRatePerUnit;
     }
+
+   
 
 
   

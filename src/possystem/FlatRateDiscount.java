@@ -13,18 +13,13 @@ public class FlatRateDiscount implements ProductDiscountStrategy{
     
 // Implemetation of Abstract Methods 
     @Override
-    public final double getPriceAfterDiscount(double unitPrice, int qty) {
+    public final double getDiscountedTotal(double unitPrice, int qty) {
         return (unitPrice - discountAmount)*qty;
     }
 
     @Override
     public final double getSavings(double unitPrice, int qty) {
-        return getOriginalPrice(unitPrice,qty) - getPriceAfterDiscount(unitPrice,qty);
-    }
-
-    @Override
-    public final double getOriginalPrice(double unitPrice, int qty) {
-        return unitPrice*qty;
+        return unitPrice*qty - getDiscountedTotal(unitPrice,qty);
     }
 
 // Getters and Setters
