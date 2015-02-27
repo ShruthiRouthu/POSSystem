@@ -12,22 +12,20 @@ public class PercentOffDiscount implements ProductDiscountStrategy {
  
 
 // Constructor    
-    public PercentOffDiscount(double discountRate) {
+    public PercentOffDiscount(final double discountRate) {
         setDiscountRate(discountRate);
     }
-    
-    
 
 // Implementing abstract methods
     
     @Override
-    public final double getDiscountedTotal(double unitPrice, int qty) {
-        return unitPrice*qty - getSavings(unitPrice, qty); 
+    public final double getDiscountedTotal(final double unitPrice, final int qty) {
+        return unitPrice*qty*(1-discountRate);
     }
     
     @Override
-    public double getSavings(double unitPrice, int qty) {
-       return unitPrice*qty*discountRate;
+    public final double getSavings(final double unitPrice, final int qty) {
+       return unitPrice*qty - getDiscountedTotal(unitPrice,qty);
     }
     
     
@@ -37,7 +35,7 @@ public class PercentOffDiscount implements ProductDiscountStrategy {
         return discountRate;
     }
 
-    public final void setDiscountRate(double discountRate) {
+    public final void setDiscountRate(final double discountRate) {
         if(discountRate < MIN_DISC_RATE || discountRate > MAX_DISCOUNT_RATE )
         {
             throw new IllegalArgumentException(DISC_RATE_ENTRY_ERROR);

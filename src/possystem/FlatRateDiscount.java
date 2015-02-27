@@ -3,11 +3,14 @@ package possystem;
 
 public class FlatRateDiscount implements ProductDiscountStrategy{
 
-    private double discountAmount ;
+    private double discountAmount = 10.00;
 
 // Constructor
     public FlatRateDiscount(double discountAmount) {
         setDiscountAmount(discountAmount);
+    }
+
+    public FlatRateDiscount() {
     }
     
     

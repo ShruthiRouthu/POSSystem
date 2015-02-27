@@ -3,38 +3,33 @@ package possystem;
 
 public class CashRegister {
 
-    private Reciept r;
-    private Printer printer;
-    
+    private Reciept reciept;
+      
     public CashRegister() {
     }
-    
-    public void startSale(String customerID)
-    {
-        Reciept r = new Reciept(customerID);
-    }
-    
-    public void addLineItem(String productID, double quantity)
-    {
-        r.addLineItem(productID, quantity);
-    }
-    
-    public void editLineItem(String productID, double quantity){
-        r.editLineItem(productID, quantity);
-    }
-    
-    public void deleteLineItem(String productID, double quantity){
-        r.deleteLineItem(productID, quantity);
-    }
-    
-    public void endSale()
-    {
-        //Print using printer object
-    }
-    
-    public void CancelSale()
-    {
-        //Print using printer object
+   
+    public final void startSale(String customerID, DataAccessStrategy db) {
+        reciept = new Reciept(customerID, db);
     }
 
+    public final void  addItem(String productID, int quantity) {
+        reciept.addLineItem(productID, quantity);
+    }
+
+//    public final void deleteItem(String productID, int quantity) {
+//        reciept.deleteLineItem(productID, quantity);
+//    }
+    
+    public final void endSale(RecieptOutputStrategy output) {
+        output.outputReciept(reciept.getRecieptString());
+        reciept = null;
+    }
+
+    public final void cancelSale() {
+        reciept = null; 
+        System.out.println("\n\n\t Sale Cancelled. ");
+    }
+
+   
+    
 }

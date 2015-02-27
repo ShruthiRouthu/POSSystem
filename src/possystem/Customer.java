@@ -8,7 +8,7 @@ public class Customer {
 
 // Constructor
     
-    public Customer() {
+    public Customer() { // Do i need it?
     }
 
     public Customer(String customerID, String customerName) {
@@ -49,8 +49,7 @@ public class Customer {
         }
         else if(customerName.length() <= 0) 
         {
-            throw new IllegalArgumentException("Error:Length of Customer Name should be greater than 0 " );
-                                               
+            throw new IllegalArgumentException("Error:Length of Customer Name should be greater than 0 " );                                 
         }
         this.customerName = customerName;
     }

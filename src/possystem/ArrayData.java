@@ -2,10 +2,10 @@
 package possystem;
 
 public class ArrayData implements DataAccessStrategy{
-    
+        
     private Customer[] customerArray = { 
           
-        new Customer("C101", "James"),
+        new Customer("C101", "James Parker"),
         new Customer("C202", "Emily Brown"),
         new Customer("C303", "Logan Williams"),
         new Customer("C404", "Sophia Taylor"),
@@ -16,16 +16,19 @@ public class ArrayData implements DataAccessStrategy{
     
     private Product[] productArray = {
        
-        new Product("P111", "Men's T-Shirt", 20.00,new GroupPurchaseDiscount(2,0.25) ),
+        new Product("P111", "Men's T-Shirt", 20.00, new GroupPurchaseDiscount(2,0.25) ),
         new Product("P222", "Women's Jeans", 50.00 , new PercentOffDiscount(0.20) ),
         new Product("P333", "Women's Dress", 100.00, new NoDiscount()),
-        new Product("P222", "Men's Pair of Socks", 5.00, new MinimumQuantityDiscount(10,0.50)),
-        new Product("P222", "Men's Coat", 150.00,new FlatRateDiscount(50.00))
+        new Product("P444", "Men's Pair of Socks", 5.00, new MinimumQuantityDiscount(10,0.50)),
+        new Product("P555", "Men's Coat", 150.00, new FlatRateDiscount(50.00))
         
     };
+    
+    public ArrayData() {
+    }
 
     @Override
-    public Customer findCustomerByID(String customerID) {
+    public final Customer findCustomerByID(String customerID) {
         
         if(customerID == null)
         {
@@ -37,7 +40,7 @@ public class ArrayData implements DataAccessStrategy{
                                                " Required format C + 3 digits (C000) ");
         }
          
-        // Initializing customer object
+        //  Initializing customer object
         Customer myCustomer = null;
         
         for(Customer c:customerArray)
@@ -53,7 +56,7 @@ public class ArrayData implements DataAccessStrategy{
     }
 
     @Override
-    public Product findProductByID(String productID) {
+    public final Product findProductByID(String productID) {
         
         if(productID == null)
         {
@@ -81,6 +84,11 @@ public class ArrayData implements DataAccessStrategy{
         
     }
     
-    
+   
     
 }
+    
+ 
+
+    
+    

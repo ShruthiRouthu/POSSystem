@@ -32,7 +32,7 @@ public class MinimumQuantityDiscount implements ProductDiscountStrategy {
     }            
     
     @Override
-    public double getSavings(double unitPrice, int qty) {
+    public final double getSavings(double unitPrice, int qty) {
         return (unitPrice*qty - getDiscountedTotal(unitPrice, qty));
     }
       

@@ -1,45 +1,39 @@
 package possystem;
 
 public class LineItem {
-    
-    private Product product;
-    private double quantity;
-    private DataAccessStrategy db;
 
-    public LineItem(String productID, double quantity) {
-        setProduct(productID);
+    private Product product;
+    private int quantity;
+
+
+//  Constructor
+    public LineItem(String productID, int quantity, DataAccessStrategy db) {
+        product = findProductByID(productID, db);
         setQuantity(quantity);
     }
 
-    public Product getProduct() {
+//  Getters and Setters  
+    public final Product getProduct() {
         return product;
     }
 
-    public void setProduct(String productID) {
-        this.product = findProductByID(productID);
-    }
-
-    public double getQuantity() {
+    public final int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(double quantity) {
-        if(quantity < 0)
-        {
+    public final void setQuantity(int quantity) {
+        if (quantity < 0) {
             throw new IllegalArgumentException("Quantity cannot be negative ");
         }
         this.quantity = quantity;
     }
-    
-    public Product findProductByID(String productID)
-    {
-        return db.findProductByID(productID);
+
+    public final String getProductID() {
+        return this.product.getProductID();
     }
-    
-    //have to figure out this
-    @Override
-    public String toString()
-    {
-        return "";
+
+//  Helper method 
+    private final Product findProductByID(String productID, DataAccessStrategy db) {
+        return db.findProductByID(productID);
     }
 }

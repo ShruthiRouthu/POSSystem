@@ -11,14 +11,14 @@ public class GroupPurchaseDiscount implements ProductDiscountStrategy {
     private double discRatePerGroup;
     
 // Constructor
-    public GroupPurchaseDiscount(int groupQuantity, double discRatePerGroup) {
+    public GroupPurchaseDiscount(final int groupQuantity, final double discRatePerGroup) {
         this.groupQuantity = groupQuantity;
         this.discRatePerGroup = discRatePerGroup;
     }
 
 // Implementing Abstract methods
     @Override
-    public final double getDiscountedTotal(double unitPrice, int qty) {
+    public final double getDiscountedTotal(final double unitPrice,final  int qty) {
         
        int nofGroups = qty/groupQuantity;
        int remainingProducts = qty%groupQuantity;
@@ -30,18 +30,18 @@ public class GroupPurchaseDiscount implements ProductDiscountStrategy {
     }
     
     @Override
-    public final double getSavings(double unitPrice, int qty) {
+    public final double getSavings(final double unitPrice, final int qty) {
         return unitPrice*qty - getDiscountedTotal(unitPrice,qty);
     }
     
     
 // Getters & Setters
 
-    public int getGroupQuantity() {
+    public final int getGroupQuantity() {
         return groupQuantity;
     }
 
-    public void setGroupQuantity(int groupQuantity) {
+    public final void setGroupQuantity(final int groupQuantity) {
         if(groupQuantity <= 0)
         {
             throw new IllegalArgumentException("groupQuantity should be greater than 0") ;
@@ -49,11 +49,11 @@ public class GroupPurchaseDiscount implements ProductDiscountStrategy {
         this.groupQuantity = groupQuantity;
     }
 
-    public double getDiscRatePerGroup() {
+    public final double getDiscRatePerGroup() {
         return discRatePerGroup;
     }
 
-    public void setDiscRatePerGroup(double discRatePerGroup) {
+    public final void setDiscRatePerGroup(final double discRatePerGroup) {
       if(discRatePerGroup < MIN_DISC_RATE || discRatePerGroup > MAX_DISCOUNT_RATE )
         {
             throw new IllegalArgumentException(DISC_RATE_ENTRY_ERROR);
